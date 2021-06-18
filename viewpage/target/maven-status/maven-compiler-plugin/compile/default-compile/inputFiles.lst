@@ -1,0 +1,14 @@
+C:\prj\storagerent\viewpage\src\main\java\storagerent\PolicyHandler.java
+C:\prj\storagerent\viewpage\src\main\java\storagerent\ViewpageApplication.java
+C:\prj\storagerent\viewpage\src\main\java\storagerent\StorageRegistered.java
+C:\prj\storagerent\viewpage\src\main\java\storagerent\AbstractEvent.java
+C:\prj\storagerent\viewpage\src\main\java\storagerent\Storageview.java
+C:\prj\storagerent\viewpage\src\main\java\storagerent\config\kafka\KafkaProcessor.java
+C:\prj\storagerent\viewpage\src\main\java\storagerent\PaymentApproved.java
+C:\prj\storagerent\viewpage\src\main\java\storagerent\ReservationConfirmed.java
+C:\prj\storagerent\viewpage\src\main\java\storagerent\StorageDeleted.java
+C:\prj\storagerent\viewpage\src\main\java\storagerent\ReservationCancelled.java
+C:\prj\storagerent\viewpage\src\main\java\storagerent\StorageviewViewHandler.java
+C:\prj\storagerent\viewpage\src\main\java\storagerent\StorageModified.java
+C:\prj\storagerent\viewpage\src\main\java\storagerent\StorageviewRepository.java
+C:\prj\storagerent\viewpage\src\main\java\storagerent\PaymentCancelled.java

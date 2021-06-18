@@ -1,0 +1,15 @@
+storagerent\PolicyHandler.class
+storagerent\StorageviewRepository.class
+storagerent\ReservationCancelled.class
+storagerent\AbstractEvent$1.class
+storagerent\AbstractEvent.class
+storagerent\config\kafka\KafkaProcessor.class
+storagerent\StorageviewViewHandler.class
+storagerent\ViewpageApplication.class
+storagerent\StorageModified.class
+storagerent\ReservationConfirmed.class
+storagerent\Storageview.class
+storagerent\PaymentCancelled.class
+storagerent\StorageRegistered.class
+storagerent\PaymentApproved.class
+storagerent\StorageDeleted.class

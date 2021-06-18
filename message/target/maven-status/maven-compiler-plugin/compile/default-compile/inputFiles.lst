@@ -1,0 +1,9 @@
+C:\prj\storagerent\message\src\main\java\storagerent\AbstractEvent.java
+C:\prj\storagerent\message\src\main\java\storagerent\MessageApplication.java
+C:\prj\storagerent\message\src\main\java\storagerent\MessageRepository.java
+C:\prj\storagerent\message\src\main\java\storagerent\ReservationCancelled.java
+C:\prj\storagerent\message\src\main\java\storagerent\config\kafka\KafkaProcessor.java
+C:\prj\storagerent\message\src\main\java\storagerent\PolicyHandler.java
+C:\prj\storagerent\message\src\main\java\storagerent\ReservationConfirmed.java
+C:\prj\storagerent\message\src\main\java\storagerent\Message.java
+C:\prj\storagerent\message\src\main\java\storagerent\MessageController.java
