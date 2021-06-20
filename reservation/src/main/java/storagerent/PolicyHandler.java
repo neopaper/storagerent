@@ -17,21 +17,18 @@ public class PolicyHandler{
 
         if(!paymentApproved.validate()) return;
 
-        updateResvationStatus(paymentApproved.getReservationId(), "reserved", paymentApproved.getPaymentId()); // Status Update
         System.out.println("\n\n##### listener ConfirmReserve : " + paymentApproved.toJson() + "\n\n");
-
+        updateResvationStatus(paymentApproved.getReservationId(), "reserved", paymentApproved.getPaymentId()); // Status Update
     }
+
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverPaymentCancelled_ConfirmCancel(@Payload PaymentCancelled paymentCancelled){
 
         if(!paymentCancelled.validate()) return;
 
         System.out.println("\n\n##### listener ConfirmCancel : " + paymentCancelled.toJson() + "\n\n");
-
-        // Sample Logic //
-        updateResvationStatus(paymentCancelled.getReservationId(), "cancelled", paymentCancelled.getPaymentId()); // Status Update
-
-            
+        updateResvationStatus(paymentCancelled.getReservationId(), "cancelled", paymentCancelled.getPaymentId()); // Status Update    
+        updateResvationStatus(paymentCancelled.getReservationId(), "cancelled", paymentCancelled.getPaymentId()); // Status Update    
     }
 
 
@@ -48,10 +45,8 @@ public class PolicyHandler{
         Optional<Reservation> res = reservationRepository.findById(reservationId);
         Reservation reservation = res.get();
 
-        if(reservationStatus.equals(reservation.getReservationStatus())) return;
-
         // room 값 수정
-        reservation.setReservationStatus(reservationStatus);; // status 수정 
+        reservation.setReservationStatus(reservationStatus); // status 수정 
         reservation.setPaymentId(paymentId); // payId 수정
 
         System.out.println("Edited status     : " + reservation.getReservationStatus());
