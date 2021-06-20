@@ -12,7 +12,7 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+ 
 public class AbstractEvent {
 
     String eventType;
