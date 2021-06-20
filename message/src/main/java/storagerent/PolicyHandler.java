@@ -17,11 +17,11 @@ public class PolicyHandler{
 
         System.out.println("\n\n##### listener SendConfirmMsg : " + reservationConfirmed.toJson() + "\n\n");
 
-        long storageId = reservationConfirmed.getStorageId()
+        long storageId = reservationConfirmed.getStorageId();
         String msgString = "예약이 완료 되었습니다. Storage 번호 : [" + storageId +"]";
 
          // 메시지 전송
-        sendMsg(storageId, storageId);
+         sendMsg(storageId, msgString);
             
     }
     @StreamListener(KafkaProcessor.INPUT)
@@ -31,11 +31,11 @@ public class PolicyHandler{
 
         System.out.println("\n\n##### listener SendCancelMsg : " + reservationCancelled.toJson() + "\n\n");
 
-        long storageId = reservationCancelled.getStorageId()
+        long storageId = reservationCancelled.getStorageId();
         String msgString = "예약이 취소 되었습니다. Storage 번호 : [" + storageId +"]";
 
          // 메시지 전송
-        sendMsg(storageId, storageId);
+        sendMsg(storageId, msgString);
             
     }
 
@@ -43,7 +43,7 @@ public class PolicyHandler{
     @StreamListener(KafkaProcessor.INPUT)
     public void whatever(@Payload String eventString){}
 
-    private void sendMsg(long storageId, String msgString)     {
+    private void sendMsg(long storageId, String msgString) {
 
         //////////////////////////////////////////////
         // roomId 룸에 대해 msgString으로 SMS를 쌓는다
