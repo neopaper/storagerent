@@ -2,8 +2,6 @@ package storagerent;
 
 import javax.persistence.*;
 import org.springframework.beans.BeanUtils;
-import java.util.List;
-import java.util.Date;
 
 @Entity
 @Table(name="Review_table")

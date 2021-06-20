@@ -2,8 +2,6 @@ package storagerent;
 
 import javax.persistence.*;
 import org.springframework.beans.BeanUtils;
-import java.util.List;
-import java.util.Date;
 
 @Entity
 @Table(name="Reservation_table")
@@ -15,22 +13,51 @@ public class Reservation {
     private Long storageId;
     private String reservationStatus;
     private Long paymentId;
+    private Float price;
 
     @PostPersist
     public void onPostPersist(){
-        ReservationCreated reservationCreated = new ReservationCreated();
-        BeanUtils.copyProperties(this, reservationCreated);
-        reservationCreated.publishAfterCommit();
+        //ReservationCreated reservationCreated = new ReservationCreated();
+        // BeanUtils.copyProperties(this, reservationCreated);
+        // reservationCreated.publishAfterCommit();
 
-        //Following code causes dependency to external APIs
-        // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
-
-        storagerent.external.Storage storage = new storagerent.external.Storage();
+        // storagerent.external.Storage storage = new storagerent.external.Storage();
         // mappings goes here 
-        // 이병관
         // Application.applicationContext.getBean(storagerent.external.StorageService.class)
         //    .chkAndReqReserve(storage);
 
+        //------------------
+        // 예약이 들어온 경우
+        //------------------
+
+        // 해당 STORAGE가 Available한 상태인지 체크
+        storagerent.external.Storage storage = new storagerent.external.Storage();
+        storage.setStorageId(this.getStorageId());
+
+        boolean result = ReservationApplication.applicationContext.getBean(storagerent.external.StorageService.class).chkAndReqReserve(storage);
+        System.out.println("######## Storage Available Check Result : " + result);
+        
+        if(result) { 
+
+            // 예약 가능한 상태인 경우(Available)
+
+            //----------------------------
+            // PAYMENT 결제 진행 (POST방식)
+            //----------------------------
+            storagerent.external.Payment payment = new storagerent.external.Payment();
+            payment.setReservationId(this.getReservationId());
+            payment.setStorageId(this.getStorageId());
+            payment.setPaymentStatus("paid");
+            ReservationApplication.applicationContext.getBean(storagerent.external.PaymentService.class)
+                .approvePayment(payment);
+
+            //----------------------------------
+            // 이벤트 발행 --> ReservationCreated
+            //----------------------------------
+            ReservationCreated reservationCreated = new ReservationCreated();
+            BeanUtils.copyProperties(this, reservationCreated);
+            reservationCreated.publishAfterCommit();
+        }
 
     }
 
@@ -83,7 +110,11 @@ public class Reservation {
         this.paymentId = paymentId;
     }
 
+    public Float getPrice() {
+        return price;
+    }
 
-
-
+    public void setPrice(Float price) {
+        this.price = price;
+    }
 }

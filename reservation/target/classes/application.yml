@@ -35,6 +35,13 @@ logging:
   level:
     org.hibernate.type: trace
     org.springframework.cloud: debug
+
+prop:
+  payment:
+    url: http://localhost:8081
+  storage:
+    url: http://localhost:8082
+
 server:
   port: 8083
 ---
@@ -62,3 +69,10 @@ spring:
         event-out:
           destination: storagerent
           contentType: application/json
+
+prop:
+  payment:
+    url: http://gateway:8080
+  storage:
+    url: http://gateway:8080
+        

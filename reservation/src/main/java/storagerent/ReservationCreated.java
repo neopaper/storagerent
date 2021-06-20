@@ -6,6 +6,7 @@ public class ReservationCreated extends AbstractEvent {
     private Long storageId;
     private String status;
     private Long payId;
+    private Float price;
 
     public ReservationCreated(){
         super();
@@ -32,11 +33,20 @@ public class ReservationCreated extends AbstractEvent {
     public void setStatus(String status) {
         this.status = status;
     }
+    
     public Long getPayId() {
         return payId;
     }
 
     public void setPayId(Long payId) {
         this.payId = payId;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
     }
 }
