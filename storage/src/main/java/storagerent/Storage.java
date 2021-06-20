@@ -27,20 +27,23 @@ public class Storage {
 
     @PostUpdate
     public void onPostUpdate(){
-        StorageModified storageModified = new StorageModified();
-        BeanUtils.copyProperties(this, storageModified);
-        storageModified.publishAfterCommit();
+        if("modify".equals(lastAction) || "review".equals(lastAction)) {
+            StorageModified storageModified = new StorageModified();
+            BeanUtils.copyProperties(this, storageModified);
+            storageModified.publishAfterCommit();
+        }
 
+        if("reserved".equals(lastAction)) {
+            StorageReserved storageReserved = new StorageReserved();
+            BeanUtils.copyProperties(this, storageReserved);
+            storageReserved.publishAfterCommit();
+        }
 
-        StorageReserved storageReserved = new StorageReserved();
-        BeanUtils.copyProperties(this, storageReserved);
-        storageReserved.publishAfterCommit();
-
-
-        StorageCancelled storageCancelled = new StorageCancelled();
-        BeanUtils.copyProperties(this, storageCancelled);
-        storageCancelled.publishAfterCommit();
-
+        if("cancelled".equals(lastAction)) {
+            StorageCancelled storageCancelled = new StorageCancelled();
+            BeanUtils.copyProperties(this, storageCancelled);
+            storageCancelled.publishAfterCommit();
+        }
 
     }
 
@@ -49,8 +52,6 @@ public class Storage {
         StorageDeleted storageDeleted = new StorageDeleted();
         BeanUtils.copyProperties(this, storageDeleted);
         storageDeleted.publishAfterCommit();
-
-
     }
 
 

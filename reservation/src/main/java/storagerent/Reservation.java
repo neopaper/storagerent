@@ -64,20 +64,23 @@ public class Reservation {
 
     @PostUpdate
     public void onPostUpdate(){
-        ReservationCancelRequested reservationCancelRequested = new ReservationCancelRequested();
-        BeanUtils.copyProperties(this, reservationCancelRequested);
-        reservationCancelRequested.publishAfterCommit();
+        if("reqCancel".equals(this.getReservationStatus())) {
+            ReservationCancelRequested reservationCancelRequested = new ReservationCancelRequested();
+            BeanUtils.copyProperties(this, reservationCancelRequested);
+            reservationCancelRequested.publishAfterCommit();
+        }
 
+        if("reserved".equals(this.getReservationStatus())) {
+            ReservationConfirmed reservationConfirmed = new ReservationConfirmed();
+            BeanUtils.copyProperties(this, reservationConfirmed);
+            reservationConfirmed.publishAfterCommit();
+        }
 
-        ReservationConfirmed reservationConfirmed = new ReservationConfirmed();
-        BeanUtils.copyProperties(this, reservationConfirmed);
-        reservationConfirmed.publishAfterCommit();
-
-
-        ReservationCancelled reservationCancelled = new ReservationCancelled();
-        BeanUtils.copyProperties(this, reservationCancelled);
-        reservationCancelled.publishAfterCommit();
-
+        if("cancelled".equals(this.getReservationStatus())) {
+            ReservationCancelled reservationCancelled = new ReservationCancelled();
+            BeanUtils.copyProperties(this, reservationCancelled);
+            reservationCancelled.publishAfterCommit();
+        }
 
     }
 

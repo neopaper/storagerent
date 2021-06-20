@@ -34,8 +34,4 @@ public class Message {
     public void setContent(String content) {
         this.content = content;
     }
-
-
-
-
 }
