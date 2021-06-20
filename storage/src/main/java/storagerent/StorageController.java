@@ -20,7 +20,8 @@ public class StorageController {
                     produces = "application/json;charset=UTF-8")
 
     public boolean chkAndReqReserve(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        System.out.println("##### /check/chkAndReqReserve  called #####");
+        System.out.println("##### /check/chkAndReqReserve  called #####" );
+        System.out.println( "->" + request.getQueryString());
 
         // Parameter로 받은 storageID 추출
         long storageId = Long.valueOf(request.getParameter("storageId"));
@@ -33,11 +34,13 @@ public class StorageController {
 
         // storage의 상태가 available이면 true
         boolean result = false;
+        
         if(storage.getStorageStatus().equals("available")) {
             result = true;
         } 
 
         System.out.println("######################## chkAndReqReserve Return : " + result);
+
         return result;
     }
  }

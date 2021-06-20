@@ -15,7 +15,7 @@ spring:
         - id: storage
           uri: http://localhost:8082
           predicates:
-            - Path=/storages/**, /reviews/** 
+            - Path=/storages/**, /reviews/**, /check/** 
         - id: reservation
           uri: http://localhost:8083
           predicates:
@@ -54,7 +54,7 @@ spring:
         - id: storage
           uri: http://storage:8082
           predicates:
-            - Path=/storages/**/reviews/** 
+            - Path=/storages/**, /reviews/**, /check/**
         - id: reservation
           uri: http://reservation:8083
           predicates:

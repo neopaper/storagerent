@@ -31,10 +31,10 @@ public class Reservation {
         //------------------
 
         // 해당 STORAGE가 Available한 상태인지 체크
-        storagerent.external.Storage storage = new storagerent.external.Storage();
-        storage.setStorageId(this.getStorageId());
+        // storagerent.external.Storage storage = new storagerent.external.Storage();
+        // storage.setStorageId(this.getStorageId());
 
-        boolean result = ReservationApplication.applicationContext.getBean(storagerent.external.StorageService.class).chkAndReqReserve(storage);
+        boolean result = ReservationApplication.applicationContext.getBean(storagerent.external.StorageService.class).chkAndReqReserve(this.getStorageId());
         System.out.println("######## Storage Available Check Result : " + result);
         
         if(result) { 
@@ -48,6 +48,7 @@ public class Reservation {
             payment.setReservationId(this.getReservationId());
             payment.setStorageId(this.getStorageId());
             payment.setPaymentStatus("paid");
+            payment.setPrice(this.price);
             ReservationApplication.applicationContext.getBean(storagerent.external.PaymentService.class)
                 .approvePayment(payment);
 

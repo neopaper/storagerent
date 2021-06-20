@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 @Service
 public class PolicyHandler{
@@ -16,12 +17,9 @@ public class PolicyHandler{
 
         if(!paymentApproved.validate()) return;
 
+        updateResvationStatus(paymentApproved.getReservationId(), "reserved", paymentApproved.getPaymentId()); // Status Update
         System.out.println("\n\n##### listener ConfirmReserve : " + paymentApproved.toJson() + "\n\n");
 
-        // Sample Logic //
-        Reservation reservation = new Reservation();
-        reservationRepository.save(reservation);
-            
     }
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverPaymentCancelled_ConfirmCancel(@Payload PaymentCancelled paymentCancelled){
@@ -31,8 +29,8 @@ public class PolicyHandler{
         System.out.println("\n\n##### listener ConfirmCancel : " + paymentCancelled.toJson() + "\n\n");
 
         // Sample Logic //
-        Reservation reservation = new Reservation();
-        reservationRepository.save(reservation);
+        updateResvationStatus(paymentCancelled.getReservationId(), "cancelled", paymentCancelled.getPaymentId()); // Status Update
+
             
     }
 
@@ -40,5 +38,31 @@ public class PolicyHandler{
     @StreamListener(KafkaProcessor.INPUT)
     public void whatever(@Payload String eventString){}
 
+    private void updateResvationStatus(long reservationId, String reservationStatus, long paymentId)     {
+
+        //------------------------------------------
+        // roomId 룸 데이터의 status, lastAction 수정
+        //////////////////////////////////////////////
+
+        // Room 테이블에서 roomId의 Data 조회 -> room
+        Optional<Reservation> res = reservationRepository.findById(reservationId);
+        Reservation reservation = res.get();
+
+        if(reservationStatus.equals(reservation.getReservationStatus())) return;
+
+        // room 값 수정
+        reservation.setReservationStatus(reservationStatus);; // status 수정 
+        reservation.setPaymentId(paymentId); // payId 수정
+
+        System.out.println("Edited status     : " + reservation.getReservationStatus());
+        System.out.println("Edited payId     : " + reservation.getPaymentId());
+
+        /////////////
+        // DB Update
+        /////////////
+        
+        reservationRepository.save(reservation);
+
+    }
 
 }

@@ -39,7 +39,7 @@ logging:
 prop:
   payment:
     url: http://localhost:8081
-  storage:
+  storage: 
     url: http://localhost:8082
 
 server:

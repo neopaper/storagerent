@@ -4,49 +4,40 @@ public class ReservationCreated extends AbstractEvent {
 
     private Long reservationId;
     private Long storageId;
-    private String status;
-    private Long payId;
+    private String reservationStatus;
+    private Long paymentId;
     private Float price;
-
-    public ReservationCreated(){
-        super();
-    }
-
+    
     public Long getReservationId() {
         return reservationId;
     }
-
     public void setReservationId(Long reservationId) {
         this.reservationId = reservationId;
     }
     public Long getStorageId() {
         return storageId;
     }
-
     public void setStorageId(Long storageId) {
         this.storageId = storageId;
     }
-    public String getStatus() {
-        return status;
+    public String getReservationStatus() {
+        return reservationStatus;
     }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setReservationStatus(String reservationStatus) {
+        this.reservationStatus = reservationStatus;
     }
-    
-    public Long getPayId() {
-        return payId;
+    public Long getPaymentId() {
+        return paymentId;
     }
-
-    public void setPayId(Long payId) {
-        this.payId = payId;
+    public void setPaymentId(Long paymentId) {
+        this.paymentId = paymentId;
     }
-
     public Float getPrice() {
         return price;
     }
-
     public void setPrice(Float price) {
         this.price = price;
     }
+
+    
 }

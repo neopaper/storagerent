@@ -8,7 +8,7 @@ public class Storage {
     private Long reviewCnt;
     private String lastAction;
     private Float price;
-
+    
     public Long getStorageId() {
         return storageId;
     }

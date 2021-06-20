@@ -6,8 +6,8 @@ public class Payment {
     private Long reservationId;
     private Long storageId;
     private String paymentStatus;
-    private Float amount;
-
+    private Float price;
+    
     public Long getPaymentId() {
         return paymentId;
     }
@@ -32,11 +32,11 @@ public class Payment {
     public void setPaymentStatus(String paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
-    public Float getAmount() {
-        return amount;
+    public Float getPrice() {
+        return price;
     }
-    public void setAmount(Float amount) {
-        this.amount = amount;
+    public void setPrice(Float price) {
+        this.price = price;
     }
 
 }

@@ -9,6 +9,5 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(name="payment", url="${prop.payment.url}")
 public interface PaymentService {
     @RequestMapping(method= RequestMethod.POST, path="/payments")
-    public long approvePayment(@RequestBody Payment payment);
-
+    public void approvePayment(@RequestBody Payment payment);
 }

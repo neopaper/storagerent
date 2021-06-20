@@ -26,7 +26,7 @@ public class StorageviewViewHandler {
             Storageview storageview = new Storageview();
             // view 객체에 이벤트의 Value 를 set 함
             storageview.setStorageId(storageRegistered.getStorageId());
-            storageview.setStorageStatus(storageRegistered.getStatus());
+            storageview.setStorageStatus(storageRegistered.getStorageStatus());
             storageview.setDescription(storageRegistered.getDescription());
             storageview.setPrice(storageRegistered.getPrice());
             // view 레파지 토리에 save
@@ -47,7 +47,7 @@ public class StorageviewViewHandler {
             if( storageviewOptional.isPresent()) {
                 Storageview storageview = storageviewOptional.get();
                 // view 객체에 이벤트의 eventDirectValue 를 set 함
-                    storageview.setStorageStatus(storageModified.getStatus());
+                    storageview.setStorageStatus(storageModified.getStorageStatus());
                     storageview.setDescription(storageModified.getDescription());
                     storageview.setPrice(storageModified.getPrice());
                     storageview.setReviewCnt(storageModified.getReviewCnt());
@@ -69,7 +69,7 @@ public class StorageviewViewHandler {
                 Storageview storageview = storageviewOptional.get();
                 // view 객체에 이벤트의 eventDirectValue 를 set 함
                     storageview.setReservationId(reservationConfirmed.getReservationId());
-                    storageview.setReservationStatus(reservationConfirmed.getStatus());
+                    storageview.setReservationStatus(reservationConfirmed.getReservationStatus());
                 // view 레파지 토리에 save
                 storageviewRepository.save(storageview);
             }
@@ -83,7 +83,7 @@ public class StorageviewViewHandler {
         try {
             if (!paymentApproved.validate()) return;
                 // view 객체 조회
-            List<Storageview> storageviewList = storageviewRepository.findByReservationId(paymentApproved.getRsvId());
+            List<Storageview> storageviewList = storageviewRepository.findByReservationId(paymentApproved.getReservationId());
             for(Storageview storageview : storageviewList){
                 // view 객체에 이벤트의 eventDirectValue 를 set 함
                 storageview.setPaymentId(paymentApproved.getPaymentId());
@@ -101,10 +101,10 @@ public class StorageviewViewHandler {
         try {
             if (!reservationCancelled.validate()) return;
                 // view 객체 조회
-            List<Storageview> storageviewList = storageviewRepository.findByReservationId(reservationCancelled.getRsvId());
+            List<Storageview> storageviewList = storageviewRepository.findByReservationId(reservationCancelled.getReservationId());
             for(Storageview storageview : storageviewList){
                 // view 객체에 이벤트의 eventDirectValue 를 set 함
-                storageview.setReservationStatus(reservationCancelled.getStatus());
+                storageview.setReservationStatus(reservationCancelled.getReservationStatus());
                 // view 레파지 토리에 save
                 storageviewRepository.save(storageview);
             }
@@ -118,7 +118,7 @@ public class StorageviewViewHandler {
         try {
             if (!paymentCancelled.validate()) return;
                 // view 객체 조회
-            List<Storageview> storageviewList = storageviewRepository.findByPaymentId(paymentCancelled.getPayId());
+            List<Storageview> storageviewList = storageviewRepository.findByPaymentId(paymentCancelled.getPaymentId());
             for(Storageview storageview : storageviewList){
                 // view 객체에 이벤트의 eventDirectValue 를 set 함
                 storageview.setPaymentStatus(paymentCancelled.getPaymentStatus());
