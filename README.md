@@ -1268,4 +1268,4 @@ kubectl apply -f deployment.yml
           persistentVolumeClaim:
             claimName: aws-efs
 ```
-
+...
